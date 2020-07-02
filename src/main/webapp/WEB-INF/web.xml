@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID"
+         version="3.1">
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--1.注册中央调度器-->
+  <servlet>
+    <servlet-name>springmvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- contextConfigLocation配置springmvc加载的配置文件(配置处理器映射器、适配器等等)
+      若不配置，默认加载WEB-INF/servlet名称-servlet(springmvc-servlet.xml)
+    -->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:config/dispatcherServlet.xml</param-value>
+    </init-param>
+    <!-- 启动顺序，数字越小，启动越早 -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!--所有请求都会被springmvc拦截 -->
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <!--
+    第一种:*.action,访问以.action结尾，由DispatcherServlet进行解析
+    第二种:/,所有访问的地址由DispatcherServlet进行解析，对静态文件的解析需要配置不让DispatcherServlet进行解析，
+            使用此种方式和实现RESTful风格的url
+    第三种:/*,这样配置不对，使用这种配置，最终要转发到一个jsp页面时，仍然会由DispatcherServlet解析jsp地址，
+            不能根据jsp页面找到handler，会报错
+    -->
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+  <!-- 注册spring的监听器 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:config/applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!--字符集过滤器-->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceRequestEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceResponseEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+</web-app>
+
