@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asa.dao.StudentDao">
+    <select id="selectStudents" resultType="Student">
+        select id,name, age from student order by id desc
+    </select>
+
+    <insert id="insertStudent">
+        insert into student(name,age) value(#{name},#{age})
+    </insert>
+
+</mapper>

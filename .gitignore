@@ -3,7 +3,7 @@
 .idea/
 .gitignore
 .gitlab-ci.yml
-oil-common.iml
+springMvcDemo01.iml
 README.md
 logs/
   
@@ -16,11 +16,7 @@ logs/
   
 # Java class files  
 *.class  
-*.jar  
-  
-# generated files  
-bin/  
-gen/  
+*.jar
   
 # Eclipse project files  
 .classpath  

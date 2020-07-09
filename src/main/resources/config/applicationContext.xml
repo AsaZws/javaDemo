@@ -12,6 +12,7 @@
     <!--  声明数据源，连接数据库  -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="clone">
+<!--        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
