@@ -4,9 +4,11 @@ import com.asa.domain.Student;
 import com.asa.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 @RequestMapping("/student")
@@ -31,6 +33,14 @@ public class StudentController {
         // 指定结果页面
         mv.setViewName("result");
         return mv;
+    }
+
+    // 查询处理
+    @RequestMapping("/queryStudent.do")
+    @ResponseBody
+    public List<Student> queryStudent() {
+        List<Student> students = service.findStudents();
+        return students;
     }
 
 }
